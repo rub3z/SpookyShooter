@@ -15,6 +15,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.components.*;
 import com.mygdx.game.systems.*;
+import com.mygdx.game.systems.CollisionCallbackSystem;
+import com.mygdx.game.systems.PhysicsDebugSystem;
+import com.mygdx.game.systems.PhysicsSystem;
+import com.mygdx.game.systems.RenderingSystem;
 import com.mygdx.game.utilities.Utilities;
 
 public class Factory {
@@ -144,7 +148,8 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body = createBody("Player", 10);
       entity.getComponent(TransformComponent.class).scale.x = 1;
       entity.getComponent(TransformComponent.class).scale.y = 0.5f;
-
+      entity.add(engine.createComponent(CollisionCallbackComponent.class));
+      entity.getComponent(BodyComponent.class).body.setUserData(entity);
       return entity;
    }
 
