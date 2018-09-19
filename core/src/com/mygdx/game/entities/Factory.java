@@ -144,6 +144,8 @@ public class Factory {
       entity.add(engine.createComponent(TransformComponent.class));
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
+      entity.add(engine.createComponent(IsPlayerComponent.class));
+
       entity.getComponent(TextureComponent.class).textureRegion = createTexture("GameScreen/Player.atlas", "Player_1", 0);
       entity.getComponent(BodyComponent.class).body = createBody("Player_1", 1);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
@@ -178,6 +180,8 @@ public class Factory {
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new PhysicsDebugSystem(world, camera));
+      engine.addSystem(new PlayerControlSystem());
+      engine.addSystem(new PlayerVelocitySystem());
       new CollisionCallbackSystem(world);
    }
 

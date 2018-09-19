@@ -9,6 +9,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.components.MovementComponent;
 import com.mygdx.game.components.PlayerVelocityStatComponent;
+import com.mygdx.game.utilities.Utilities;
 
 public class PlayerVelocitySystem extends IntervalSystem {
     private ImmutableArray<Entity> entities;
@@ -16,8 +17,11 @@ public class PlayerVelocitySystem extends IntervalSystem {
     private ComponentMapper<BodyComponent> bm;
     private ComponentMapper<PlayerVelocityStatComponent> pm;
 
-    public PlayerVelocitySystem(float interval) {
-        super(interval);
+    public PlayerVelocitySystem() {
+        super(Utilities.MAX_STEP_TIME);
+        mm = ComponentMapper.getFor(MovementComponent.class);
+        bm = ComponentMapper.getFor(BodyComponent.class);
+        pm = ComponentMapper.getFor(PlayerVelocityStatComponent.class);
     }
 
     @Override
@@ -42,6 +46,8 @@ public class PlayerVelocitySystem extends IntervalSystem {
                 bC.body.setLinearVelocity(bC.body.getLinearVelocity().x,  pVC.movingSpeed);
             if(mC.moveDown)
                 bC.body.setLinearVelocity(bC.body.getLinearVelocity().x, -pVC.movingSpeed);
+            if (!mC.moveLeft && !mC.moveRight && !mC.moveUp && !mC.moveDown)
+               bC.body.setLinearVelocity(0, 0);
         }
     }
 }
