@@ -6,7 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.components.TextureComponent;
 import com.mygdx.game.components.TransformComponent;
@@ -44,12 +46,13 @@ public class RenderingSystem extends SortedIteratingSystem {
 
     @Override
     public void update(float deltaTime){
-       super.update(deltaTime);
-       Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 0.95f);
+
+       Gdx.gl.glClearColor(1, 0, 0, 1);
        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
        camera.update();
        spriteBatch.setProjectionMatrix(camera.combined);
-       //spriteBatch.enableBlending();
+       spriteBatch.enableBlending();
+       super.update(deltaTime);
     }
     /**
      * This method is called on every entity on every update call of the EntitySystem. Override this to implement your system's
@@ -66,7 +69,6 @@ public class RenderingSystem extends SortedIteratingSystem {
         if(textureComponent!=null&&!transformComponent.isHidden){
             float width= textureComponent.textureRegion.getRegionWidth();
             float height=textureComponent.textureRegion.getRegionHeight();
-
             float originX= width/2f;
             float originY= height/2f;
             spriteBatch.draw(textureComponent.textureRegion,
@@ -80,6 +82,7 @@ public class RenderingSystem extends SortedIteratingSystem {
                     Utilities.PixelsToMeters(transformComponent.scale.y),
                     transformComponent.rotation);
         }
+
         spriteBatch.end();
     }
 

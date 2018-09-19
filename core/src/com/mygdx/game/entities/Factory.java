@@ -130,14 +130,15 @@ public class Factory {
      */
    public Entity createPlayer() {
       Entity entity=engine.createEntity();
-
       entity.add(engine.createComponent(MovementComponent.class));
       entity.add(engine.createComponent(PlayerVelocityStatComponent.class));
       entity.add(engine.createComponent(TransformComponent.class));
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
       entity.getComponent(TextureComponent.class).textureRegion=createTexture("GameScreen/Player.atlas","Player_0",0);
-      entity.getComponent(BodyComponent.class).body=createBody("Player");
+      entity.getComponent(BodyComponent.class).body=createBody("Player",10);
+      entity.getComponent(TransformComponent.class).scale.x=1;
+      entity.getComponent(TransformComponent.class).scale.y=0.5f;
 
       return entity;
    }
@@ -162,7 +163,7 @@ public class Factory {
      * Load systems into the Ashley engine.
      */
     private void loadSystemsIntoEngine(){
-       // engine.addSystem(new RenderingSystem(spriteBatch,camera));
+        engine.addSystem(new RenderingSystem(spriteBatch,camera));
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsDebugSystem(world,camera));
         new CollisionCallbackSystem(world);
@@ -185,14 +186,14 @@ public class Factory {
     * @param nameOfBody of the body
     * @return Box2D body
     */
-    public Body createBody(String nameOfBody){
+    public Body createBody(String nameOfBody, float scale){
        BodyDef bodyDef = new BodyDef();
-       bodyDef.type = BodyDef.BodyType.StaticBody;
-       bodyDef.position.set(0, 0);
+       bodyDef.type = BodyDef.BodyType.DynamicBody;
+       bodyDef.position.set(10, 10);
        Body body=world.createBody(bodyDef);
        FixtureDef fixtureDef=new FixtureDef();
        fixtureDef.density=1;
-       bodyEditorLoader.attachFixture(body,nameOfBody,fixtureDef,1);
+       bodyEditorLoader.attachFixture(body,nameOfBody,fixtureDef,scale);
        return body;
     }
 

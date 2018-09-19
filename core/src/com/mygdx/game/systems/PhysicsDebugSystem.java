@@ -25,8 +25,6 @@ public class PhysicsDebugSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime){
-       System.out.println(Factory.getFactory().getEngine().getEntities().get(0).getComponent(BodyComponent.class).body.getPosition());
-
        box2DDebugRenderer.render(world,camera.combined);
     }
 

@@ -51,8 +51,8 @@ public class PhysicsSystem extends IntervalSystem {
             TransformComponent transformComponent=tm.get(entity);
             BodyComponent bodyComponent= bm.get(entity);
             Vector2 position=bodyComponent.body.getPosition();
-            transformComponent.position.x=position.x;
-            transformComponent.position.y=position.y;
+            transformComponent.position.x=(position.x);
+            transformComponent.position.y=(position.y);
             transformComponent.rotation=bodyComponent.body.getAngle()*MathUtils.radiansToDegrees;
         }
     }
