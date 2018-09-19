@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.entities.Factory;
 
 public class PhysicsDebugSystem extends IteratingSystem {
@@ -24,7 +25,9 @@ public class PhysicsDebugSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime){
-        box2DDebugRenderer.render(world,camera.combined);
+       System.out.println(Factory.getFactory().getEngine().getEntities().get(0).getComponent(BodyComponent.class).body.getPosition());
+
+       box2DDebugRenderer.render(world,camera.combined);
     }
 
     /**

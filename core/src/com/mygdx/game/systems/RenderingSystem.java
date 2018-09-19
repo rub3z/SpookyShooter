@@ -2,7 +2,9 @@ package com.mygdx.game.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.components.BodyComponent;
@@ -40,6 +42,15 @@ public class RenderingSystem extends SortedIteratingSystem {
          this.camera=camera;
     }
 
+    @Override
+    public void update(float deltaTime){
+       super.update(deltaTime);
+       Gdx.gl.glClearColor(0.95f, 0.95f, 0.95f, 0.95f);
+       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+       camera.update();
+       spriteBatch.setProjectionMatrix(camera.combined);
+       //spriteBatch.enableBlending();
+    }
     /**
      * This method is called on every entity on every update call of the EntitySystem. Override this to implement your system's
      * specific processing.
@@ -49,9 +60,6 @@ public class RenderingSystem extends SortedIteratingSystem {
      */
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        camera.update();
-        spriteBatch.setProjectionMatrix(camera.combined);
-        spriteBatch.enableBlending();
         spriteBatch.begin();
         TextureComponent textureComponent= textureMapper.get(entity);
         TransformComponent transformComponent=transformMapper.get(entity);

@@ -2,20 +2,19 @@ package com.mygdx.game.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.components.BodyComponent;
-import com.mygdx.game.components.MovementComponent;
-import com.mygdx.game.components.PlayerVelocityStatComponent;
-import com.mygdx.game.components.TransformComponent;
-import com.mygdx.game.systems.CollisionCallbackSystem;
-import com.mygdx.game.systems.PhysicsDebugSystem;
-import com.mygdx.game.systems.PhysicsSystem;
-import com.mygdx.game.systems.RenderingSystem;
+import com.mygdx.game.components.*;
+import com.mygdx.game.systems.*;
 import com.mygdx.game.utilities.Utilities;
 
 public class Factory {
@@ -46,7 +45,16 @@ public class Factory {
      */
     private SpriteBatch spriteBatch;
 
-    private OrthographicCamera camera;
+   /**
+    * Camera
+    */
+   private OrthographicCamera camera;
+
+   /**
+    *Loader for hitbox
+    */
+
+   private BodyEditorLoader bodyEditorLoader;
 
     /**
      * Get a singleton Factory object.
@@ -71,11 +79,17 @@ public class Factory {
 
         spriteBatch=new SpriteBatch();//Declare SpriteBatch
 
+       //Set up camera
         camera=new OrthographicCamera(Utilities.FRUSTUM_WIDTH,Utilities.FRUSTUM_HEIGHT);
         camera.position.set(Utilities.FRUSTUM_WIDTH/2f,Utilities.FRUSTUM_HEIGHT/2f,0);
 
+       bodyEditorLoader=new BodyEditorLoader(Gdx.files.internal("GameScreen/HitboxData.json"));//Declare hitbox loader
+
         engine=new PooledEngine(); //Ashely engine
         loadSystemsIntoEngine(); //Load systems into engine
+       createEntities();
+
+
     }
 
     /**
@@ -90,7 +104,8 @@ public class Factory {
      * Load predetermine assets into AssetManager.
      */
     private void loadAssets(){
-
+      assetManager.load("GameScreen/Player.atlas", TextureAtlas.class);
+      assetManager.finishLoading();
     }
 
     /**
@@ -115,15 +130,15 @@ public class Factory {
      */
    public Entity createPlayer() {
       Entity entity=engine.createEntity();
+
       entity.add(engine.createComponent(MovementComponent.class));
       entity.add(engine.createComponent(PlayerVelocityStatComponent.class));
       entity.add(engine.createComponent(TransformComponent.class));
       entity.add(engine.createComponent(BodyComponent.class));
-      BodyDef bodyDef = new BodyDef();
-      bodyDef.type = BodyDef.BodyType.KinematicBody;
-      bodyDef.position.set(0, 0);
-      entity.getComponent(BodyComponent.class).body = world.createBody(bodyDef);
-      entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      entity.add(engine.createComponent(TextureComponent.class));
+      entity.getComponent(TextureComponent.class).textureRegion=createTexture("GameScreen/Player.atlas","Player_0",0);
+      entity.getComponent(BodyComponent.class).body=createBody("Player");
+
       return entity;
    }
 
@@ -147,9 +162,45 @@ public class Factory {
      * Load systems into the Ashley engine.
      */
     private void loadSystemsIntoEngine(){
-        engine.addSystem(new RenderingSystem(spriteBatch,camera));
+       // engine.addSystem(new RenderingSystem(spriteBatch,camera));
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsDebugSystem(world,camera));
         new CollisionCallbackSystem(world);
+    }
+
+   /**
+    * Call this function to create TextureRegion
+    * @param path to Atlas file
+    * @param name name of the texture in the atlas
+    * @param index index of texture
+    * @return TextureRegion
+    */
+    public TextureRegion createTexture(String path, String name, int index){
+       TextureAtlas ta=assetManager.get(path, TextureAtlas.class);
+       return ta.findRegion(name, index);
+    }
+
+   /**
+    * Call this function to create Box2D body
+    * @param nameOfBody of the body
+    * @return Box2D body
+    */
+    public Body createBody(String nameOfBody){
+       BodyDef bodyDef = new BodyDef();
+       bodyDef.type = BodyDef.BodyType.StaticBody;
+       bodyDef.position.set(0, 0);
+       Body body=world.createBody(bodyDef);
+       FixtureDef fixtureDef=new FixtureDef();
+       fixtureDef.density=1;
+       bodyEditorLoader.attachFixture(body,nameOfBody,fixtureDef,1);
+       return body;
+    }
+
+   /**
+    * Call this method to create entities for the start of the game.
+    */
+   public void createEntities (){
+       engine.addEntity(createPlayer());
+      System.out.println(engine.getEntities().size());
     }
 }
