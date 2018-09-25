@@ -31,6 +31,6 @@ public class Utilities {
 
     //Use in
     public static final float MAX_STEP_TIME=1/300f;
-    public static final int VELOCITY_ITERATIONS = 8;
-    public static final int POSITION_ITERATIONS = 4;
+    public static final int VELOCITY_ITERATIONS = 6;
+    public static final int POSITION_ITERATIONS = 2;
 }

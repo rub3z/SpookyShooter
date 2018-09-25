@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.components.MovementComponent;
 import com.mygdx.game.components.PlayerVelocityStatComponent;
@@ -38,10 +39,10 @@ public class PlayerVelocitySystem extends IntervalSystem {
             BodyComponent bC= bm.get(entity);
             MovementComponent mC = mm.get(entity);
             PlayerVelocityStatComponent pVC = pm.get(entity);
-            if(mC.moveLeft)
+            if(mC.moveLeft )
                 bC.body.setLinearVelocity(-pVC.movingSpeed, bC.body.getLinearVelocity().y);
             if(mC.moveRight)
-                bC.body.setLinearVelocity( pVC.movingSpeed, bC.body.getLinearVelocity().y);
+               bC.body.setLinearVelocity( pVC.movingSpeed, bC.body.getLinearVelocity().y);
             if(mC.moveUp)
                 bC.body.setLinearVelocity(bC.body.getLinearVelocity().x,  pVC.movingSpeed);
             if(mC.moveDown)
