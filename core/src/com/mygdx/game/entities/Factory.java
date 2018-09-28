@@ -63,6 +63,7 @@ public class Factory {
    /**
     * Default Constructor
     */
+
    private Factory() {
       assetManager = new AssetManager(); //Declare AssetManager
       loadAssets();// Load assets
@@ -80,8 +81,6 @@ public class Factory {
       engine = new PooledEngine(); //Ashely engine
       loadSystemsIntoEngine(); //Load systems into engine
       createEntities();
-
-
    }
 
    /**
@@ -180,9 +179,10 @@ public class Factory {
    private void loadSystemsIntoEngine() {
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
-     // engine.addSystem(new PhysicsDebugSystem(world, camera));
+      engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
+      engine.addSystem(new Box2dBodyCleaningSystem(world));
       new CollisionCallbackSystem(world);
    }
 

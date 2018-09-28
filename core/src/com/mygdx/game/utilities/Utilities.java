@@ -26,7 +26,8 @@ public class Utilities {
         return pixelValue*PIXELS_TO_METRES;
     }
     public static float MetersToPixels(float meterValue){
-        return meterValue*PIXELS_TO_METRES;
+
+       return meterValue*PPM;
     }
 
     //Use in
