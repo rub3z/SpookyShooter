@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.*;
+import com.mygdx.game.components.Scripts.CollisionCallback;
+import com.mygdx.game.components.Scripts.InvisibleWallCollisionCallback;
 import com.mygdx.game.systems.*;
 import com.mygdx.game.systems.CollisionCallbackSystem;
 import com.mygdx.game.systems.PhysicsDebugSystem;
@@ -175,7 +177,6 @@ public class Factory {
    }
 
    public Entity shoot(float x, float y) {
-      System.out.println("PEW");
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(MovementComponent.class));
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
@@ -183,7 +184,6 @@ public class Factory {
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
       entity.add(engine.createComponent(IsBulletComponent.class));
-
       entity.getComponent(TextureComponent.class).textureRegion = createTexture("GameScreen/Player.atlas", "Player_1", 0);
       entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 1);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
@@ -191,6 +191,7 @@ public class Factory {
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_PROJECTILE, Utilities.MASK_PLAYER_PROJECTILE);
+      engine.addEntity(entity);
       return entity;
    }
 
@@ -216,12 +217,14 @@ public class Factory {
     * Load systems into the Ashley engine.
     */
    private void loadSystemsIntoEngine() {
+       EntityRemovingSystem entityRemovingSystem=new EntityRemovingSystem(world,engine);
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
+      engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
-      engine.addSystem(new Box2dBodyCleaningSystem(world));
+      engine.addSystem(entityRemovingSystem);
       engine.addSystem(new BulletControlSystem());
       engine.addSystem(new BulletVelocitySystem());
       new CollisionCallbackSystem(world);
@@ -246,10 +249,10 @@ public class Factory {
     * @param nameOfBody of the body
     * @return Box2D body
     */
-   public Body createBody(String nameOfBody, float posx, float posy,  float scale) {
+   public Body createBody(String nameOfBody, float posX, float posY,  float scale) {
       BodyDef bodyDef = new BodyDef();
       bodyDef.type = BodyDef.BodyType.DynamicBody;
-      bodyDef.position.set(posx, posy);
+      bodyDef.position.set(posX, posY);
       Body body = world.createBody(bodyDef);
       FixtureDef fixtureDef = new FixtureDef();
       fixtureDef.density = 1;
@@ -263,6 +266,7 @@ public class Factory {
    public void createEntities(int playerCount) {
       for(int i = 0; i < playerCount; i++)
          engine.addEntity(createPlayer("Player_1", 10 + (i * 10), 10, i));
+      engine.addEntity(createAnInvisibleWall(15,15));
    }
 
    /**
@@ -279,5 +283,17 @@ public class Factory {
          filter.maskBits = maskingBits;
          fixture.setFilterData(filter);
       }
+   }
+
+   public Entity createAnInvisibleWall(float x, float y){
+       Entity entity = engine.createEntity();
+       entity.add(engine.createComponent(BodyComponent.class));
+       entity.add(engine.createComponent(CollisionCallbackComponent.class));
+       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=new InvisibleWallCollisionCallback();
+       entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 1);
+       entity.getComponent(BodyComponent.class).body.setUserData(entity);
+       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
+       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_ENVIRONMENT, Utilities.MASK_ENVIRONMENT);
+        return  entity;
    }
 }
