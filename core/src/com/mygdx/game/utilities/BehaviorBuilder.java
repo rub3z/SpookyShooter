@@ -1,10 +1,12 @@
 package com.mygdx.game.utilities;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.components.Scripts.Behavior;
-
+import com.mygdx.game.components.SteeringComponent;
+import com.mygdx.game.entities.Factory;
 
 
 public class BehaviorBuilder {
@@ -36,21 +38,67 @@ public class BehaviorBuilder {
          }else if (command[0].equals("wander")){
 
          }
-
       }
       return behaviors;
    }
 
-   private Behavior move(float posX, float posY){
-      return null;
+   private Behavior move(final float posX, final float posY){
+      return new Behavior() {
+         private float accumulator=0;
+         @Override
+         public void setBehavior(Entity entity) {
+            entity.getComponent(SteeringComponent.class).steeringBehavior=
+                    SteeringPresets.getArrive(entity.getComponent(SteeringComponent.class),posX,posY);
+         }
+
+         @Override
+         public boolean isDone(Entity entity, float deltaTime) {
+            if(entity.getComponent(SteeringComponent.class).body.getLinearVelocity().isZero(0.01f)){
+               accumulator+=deltaTime;
+            }else{
+               accumulator=0;
+            }
+            return accumulator>1;
+         }
+      };
    }
    private Behavior shoot(){
-      return null;
+      return new Behavior() {
+         @Override
+         public void setBehavior(Entity entity) {
+
+         }
+
+         @Override
+         public boolean isDone(Entity entity, float deltaTime) {
+            return true;
+         }
+      };
    }
    private Behavior sleep(){
-      return null;
+      return new Behavior() {
+         @Override
+         public void setBehavior(Entity entity) {
+
+         }
+
+         @Override
+         public boolean isDone(Entity entity, float deltaTime) {
+            return false;
+         }
+      };
    }
    private Behavior wander(){
-      return null;
+      return new Behavior() {
+         @Override
+         public void setBehavior(Entity entity) {
+
+         }
+
+         @Override
+         public boolean isDone(Entity entity, float deltaTime) {
+            return false;
+         }
+      };
    }
 }

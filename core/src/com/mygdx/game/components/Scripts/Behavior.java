@@ -7,8 +7,7 @@ public interface Behavior {
    /**
     * Run this behavior every frame
     * @param entity entity that this behavior belong to
-    * @param deltaTime time since the last frame call.
     */
-    void runBehavior(Entity entity, float deltaTime);
-    boolean isDone();
+    void setBehavior(Entity entity);
+    boolean isDone(Entity entity, float deltaTime);
 }

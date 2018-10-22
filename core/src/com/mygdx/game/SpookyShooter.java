@@ -32,7 +32,6 @@ public class SpookyShooter extends Game {
     */
 
    public void changeScreen(int choice, int playerCount) {
-      BehaviorBuilder.getInstance().load("GameScreen/Behaviors/Behavior1.txt");
       switch (choice) {
          case 1:
             setScreen(new TitleScreen(this));
