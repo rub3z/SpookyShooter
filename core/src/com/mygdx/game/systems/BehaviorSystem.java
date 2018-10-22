@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.mygdx.game.components.BehaviorComponent;
-import com.mygdx.game.components.Scripts.Behavior;
 
 public class BehaviorSystem extends IteratingSystem {
    private ComponentMapper<BehaviorComponent> bcm;
@@ -24,8 +23,14 @@ public class BehaviorSystem extends IteratingSystem {
    @Override
    protected void processEntity(Entity entity, float deltaTime) {
       BehaviorComponent behaviorComponent=bcm.get(entity);
-      if (behaviorComponent.behavior!=null){
-         behaviorComponent.behavior.runBehavior(entity,deltaTime);
+      if(behaviorComponent.behaviors!=null &&behaviorComponent.behaviors.size>0){
+         behaviorComponent.behaviors.get(behaviorComponent.count).runBehavior(entity,deltaTime);
+         if(behaviorComponent.behaviors.get(behaviorComponent.count).isDone()){
+            behaviorComponent.count++;
+            if(behaviorComponent.count>=behaviorComponent.behaviors.size){
+               behaviorComponent.count=0;
+            }
+         }
       }
    }
 }

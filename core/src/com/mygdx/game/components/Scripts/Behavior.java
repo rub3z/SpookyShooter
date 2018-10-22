@@ -10,4 +10,5 @@ public interface Behavior {
     * @param deltaTime time since the last frame call.
     */
     void runBehavior(Entity entity, float deltaTime);
+    boolean isDone();
 }

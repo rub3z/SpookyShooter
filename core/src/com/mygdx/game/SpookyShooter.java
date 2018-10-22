@@ -3,11 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.components.Scripts.Behavior;
 import com.mygdx.game.screens.GameOverScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.MainMenuScreen;
 import com.mygdx.game.screens.TitleScreen;
 import com.mygdx.game.ui.Gameover;
+import com.mygdx.game.utilities.BehaviorBuilder;
 
 /**
  * This is the entry point to the game.
@@ -30,6 +32,7 @@ public class SpookyShooter extends Game {
     */
 
    public void changeScreen(int choice, int playerCount) {
+      BehaviorBuilder.getInstance().load("GameScreen/Behaviors/Behavior1.txt");
       switch (choice) {
          case 1:
             setScreen(new TitleScreen(this));
