@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.SpookyShooter;
+import com.mygdx.game.utilities.Utilities;
 
 /**
  * This is a title screen. It will be the first screen that will be display on the start of the application
