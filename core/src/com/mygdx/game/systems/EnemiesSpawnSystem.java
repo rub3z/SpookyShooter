@@ -14,7 +14,7 @@ public class EnemiesSpawnSystem extends IteratingSystem {
    public EnemiesSpawnSystem(){
       super(Family.all().get());
       enemySpawnData=new Array<EnemySpawnData>();
-      enemySpawnData.add(new EnemySpawnData(12) {
+      enemySpawnData.add(new EnemySpawnData(1) {
          @Override
          public void spawn() {
             Factory.getFactory().spawnEnemy(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10);
