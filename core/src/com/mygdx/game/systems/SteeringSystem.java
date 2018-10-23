@@ -33,7 +33,6 @@ public class SteeringSystem extends IteratingSystem {
    @Override
    protected void processEntity(Entity entity, float deltaTime) {
          SteeringComponent steeringComponent=steeringComponentComponentMapper.get(entity);
-      System.out.println(steeringComponent.body.getLinearVelocity());
          try{
             steeringComponent.update(deltaTime);
          }catch (NullPointerException e){

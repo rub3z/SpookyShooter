@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.entities.Factory;
+import com.mygdx.game.utilities.Utilities;
 
 public class EnemiesSpawnSystem extends IteratingSystem {
 
@@ -16,9 +17,7 @@ public class EnemiesSpawnSystem extends IteratingSystem {
       enemySpawnData.add(new EnemySpawnData(2) {
          @Override
          public void spawn() {
-            if(count<2)
-               Factory.getFactory().spawnEnemy(0,0);
-            count++;
+            Factory.getFactory().spawnEnemy(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10);
          }
       });
 
@@ -50,7 +49,6 @@ public class EnemiesSpawnSystem extends IteratingSystem {
    abstract class EnemySpawnData{
       public float spawnRate; //How many enemies per second.
       public float accumulator;
-      public float count=0;
       public EnemySpawnData(float spawnRate){
          this.spawnRate=1/spawnRate;
          accumulator=0;
