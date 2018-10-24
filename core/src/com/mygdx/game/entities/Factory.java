@@ -343,7 +343,6 @@ public class Factory {
     * @return Box2D body
     */
    public Body createBody(String nameOfBody, float posX, float posY,  float scale) {
-      Pools.get(BodyDef.class).obtain();
       BodyDef bodyDef = new BodyDef();
       bodyDef.type = BodyDef.BodyType.DynamicBody;
       bodyDef.position.set(posX, posY);
