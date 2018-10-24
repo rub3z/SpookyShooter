@@ -117,6 +117,8 @@ public class Factory {
    private void loadAssets() {
       assetManager.load("GameScreen/Player.atlas", TextureAtlas.class);
       assetManager.load("GameScreen/Laser.atlas",TextureAtlas.class);
+      assetManager.load("GameScreen/Enemies.atlas",TextureAtlas.class);
+      assetManager.load("GameScreen/Bullet.atlas",TextureAtlas.class);
       assetManager.finishLoading();
    }
 
@@ -236,11 +238,11 @@ public class Factory {
 
        entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
                Pools.get(EnemyCollisionCallback.class).obtain();
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", "Player_1", 10);
-      entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 1);
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Enemies.atlas", "Enemies_0", 5);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_0", x, y, 2);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
-      entity.getComponent(TransformComponent.class).scale.x = 2f;
-      entity.getComponent(TransformComponent.class).scale.y = 2f;
+      entity.getComponent(TransformComponent.class).scale.x = 1f;
+      entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY);
 
@@ -264,11 +266,11 @@ public class Factory {
 
       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
               Pools.get(EnemyCollisionCallback.class).obtain();
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", "Player_1", 10);
-      entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 1);
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Enemies.atlas", "Enemies_0", 5);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_0", x, y, 2);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
-      entity.getComponent(TransformComponent.class).scale.x = 2f;
-      entity.getComponent(TransformComponent.class).scale.y = 2f;
+      entity.getComponent(TransformComponent.class).scale.x = 1f;
+      entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY);
 
@@ -422,7 +424,7 @@ public class Factory {
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
       entity.add(engine.createComponent(IsEnemyBulletComponent.class));
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", "Player_1", 10);
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Bullet.atlas", "Bullet_0", 8);
       entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 1);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
