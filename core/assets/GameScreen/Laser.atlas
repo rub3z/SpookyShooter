@@ -1,0 +1,96 @@
+
+Laser.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Laser_0
+  rotate: false
+  xy: 2, 687
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 1
+Laser_0
+  rotate: false
+  xy: 2, 2
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 2
+Laser_0
+  rotate: false
+  xy: 516, 687
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 3
+Laser_0
+  rotate: false
+  xy: 516, 2
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 4
+Laser_0
+  rotate: false
+  xy: 1030, 687
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 9
+Laser_0
+  rotate: false
+  xy: 1030, 2
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 10
+
+Laser2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Laser_0
+  rotate: false
+  xy: 2, 687
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 11
+Laser_0
+  rotate: false
+  xy: 2, 2
+  size: 512, 683
+  orig: 512, 683
+  offset: 0, 0
+  index: 12
+Laser_0
+  rotate: false
+  xy: 516, 688
+  size: 512, 682
+  orig: 512, 682
+  offset: 0, 0
+  index: 5
+Laser_0
+  rotate: false
+  xy: 516, 4
+  size: 512, 682
+  orig: 512, 682
+  offset: 0, 0
+  index: 6
+Laser_0
+  rotate: false
+  xy: 1030, 688
+  size: 512, 682
+  orig: 512, 682
+  offset: 0, 0
+  index: 7
+Laser_0
+  rotate: false
+  xy: 1030, 4
+  size: 512, 682
+  orig: 512, 682
+  offset: 0, 0
+  index: 8
