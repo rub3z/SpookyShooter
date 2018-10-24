@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pools;
 import com.mygdx.game.components.*;
 import com.mygdx.game.components.Scripts.EnemyCollisionCallback;
 import com.mygdx.game.components.Scripts.InvisibleWallCollisionCallback;
@@ -63,7 +65,6 @@ public class Factory {
     */
 
    private BodyEditorLoader bodyEditorLoader;
-
    /**
     * Default Constructor
     */
@@ -152,7 +153,7 @@ public class Factory {
       entity.add(engine.createComponent(IsPlayerComponent.class));
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
-      entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=new PlayerCollisionCallback();
+      entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(PlayerCollisionCallback.class).obtain();
       entity.add(engine.createComponent(IsLaserComponent.class));
       entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
@@ -202,12 +203,14 @@ public class Factory {
       entity.add(engine.createComponent(TextureComponent.class));
       entity.add(engine.createComponent(IsLaserComponent.class));
 
+
       entity.getComponent(IsLaserComponent.class).playerNum=playerNum;
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Laser.atlas", "Laser_0", 15);
 
       entity.getComponent(BodyComponent.class).body = createBody("Laser_0", x, y, 35);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
-      entity.getComponent(TransformComponent.class).scale.y = 1f;
+      entity.getComponent(TransformComponent.class).scale.y = 1.1f;
+      entity.getComponent(TransformComponent.class).position.z=-1;
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
 
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
@@ -232,7 +235,7 @@ public class Factory {
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
 
        entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
-               new EnemyCollisionCallback();
+               Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", "Player_1", 10);
       entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 1);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
@@ -260,7 +263,7 @@ public class Factory {
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
 
       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
-              new EnemyCollisionCallback();
+              Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", "Player_1", 10);
       entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 1);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
@@ -340,6 +343,7 @@ public class Factory {
     * @return Box2D body
     */
    public Body createBody(String nameOfBody, float posX, float posY,  float scale) {
+      Pools.get(BodyDef.class).obtain();
       BodyDef bodyDef = new BodyDef();
       bodyDef.type = BodyDef.BodyType.DynamicBody;
       bodyDef.position.set(posX, posY);
@@ -384,7 +388,7 @@ public class Factory {
        Entity entity = engine.createEntity();
        entity.add(engine.createComponent(BodyComponent.class));
        entity.add(engine.createComponent(CollisionCallbackComponent.class));
-       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=new InvisibleWallCollisionCallback();
+       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(InvisibleWallCollisionCallback.class).obtain();
        entity.getComponent(BodyComponent.class).body = createBody("Bullet_1",x, y, scale);
        entity.getComponent(BodyComponent.class).body.setUserData(entity);
        entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);

@@ -45,7 +45,7 @@ public class LaserSystem extends IntervalSystem {
                 entity.getComponent(IsPlayerComponent.class).playerNum);
             }
             else {
-               lc.laser.getComponent(BodyComponent.class).body.setTransform(bC.body.getPosition().x, bC.body.getPosition().y,
+               lc.laser.getComponent(BodyComponent.class).body.setTransform(bC.body.getPosition().x, bC.body.getPosition().y+23,
                 0);
             }
          }
