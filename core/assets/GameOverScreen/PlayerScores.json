@@ -2,7 +2,7 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 1270
+	score: 2930
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -82,122 +82,92 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 640
+	score: 2930
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 640
+	score: 2930
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 640
+	score: 2930
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 640
+	score: 2820
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 600
+	score: 2820
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 600
+	score: 2820
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 600
+	score: 2820
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 600
+	score: 2040
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 600
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 590
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 590
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 590
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 590
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 590
+	score: 1150
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 580
+	score: 870
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 580
+	score: 870
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 580
+	score: 870
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 580
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 580
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 430
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 430
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 430
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 430
-}
-{
-	class: com.mygdx.game.ui.Gameover$Player
-	name: Player 0
-	score: 430
+	score: 870
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -232,22 +202,22 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 350
+	score: 390
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 350
+	score: 390
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 350
+	score: 390
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 350
+	score: 390
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -307,27 +277,27 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 200
+	score: 120
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 200
+	score: 120
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 200
+	score: 120
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 200
+	score: 120
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 200
+	score: 120
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -2012,12 +1982,12 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 0
+	score: 20
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 0
+	score: 10
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
