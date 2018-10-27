@@ -42,7 +42,9 @@ public class ParticleEffectSystem extends IteratingSystem {
       batch.enableBlending();
       if(shouldRender){
          batch.begin();
+         System.out.println(renderQueue.size);
          for (Entity entity : renderQueue) {
+
             ParticleEffectDataComponent particleEffectComponent = peM.get(entity);
             particleEffectComponent.particleEffect.draw(batch, deltaTime);
          }
@@ -74,6 +76,7 @@ public class ParticleEffectSystem extends IteratingSystem {
 
       //Update position is attached to body
       if(particleEffectComponent.isAttached){
+
          particleEffectComponent.particleEffect.setPosition(particleEffectComponent.attachedBody.getPosition().x+ particleEffectComponent.xOffset,
                  particleEffectComponent.attachedBody.getPosition().y+particleEffectComponent.yOffset);
       }

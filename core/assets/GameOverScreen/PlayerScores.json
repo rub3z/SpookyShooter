@@ -7,7 +7,27 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 880
+	score: 930
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 930
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 930
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 930
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 930
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -27,7 +47,32 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 640
+	score: 880
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 670
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 670
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 670
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 670
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 670
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -48,6 +93,36 @@
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
 	score: 640
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 640
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 600
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 600
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 600
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 600
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 600
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -127,7 +202,27 @@
 {
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
-	score: 350
+	score: 400
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 400
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 400
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 400
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 400
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -148,6 +243,36 @@
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
 	score: 350
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 350
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 270
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 270
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 270
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 270
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 270
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player
@@ -1133,6 +1258,31 @@
 	class: com.mygdx.game.ui.Gameover$Player
 	name: Player 0
 	score: 10
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 0
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 0
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 0
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 0
+}
+{
+	class: com.mygdx.game.ui.Gameover$Player
+	name: Player 0
+	score: 0
 }
 {
 	class: com.mygdx.game.ui.Gameover$Player

@@ -173,10 +173,7 @@ public class Factory {
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       this.player=entity;
-      entity.add(engine.createComponent(ParticleEffectComponent.class));
-      Entity particle=createParticleEffect(ParticleEffectManager.CANDYCORNEXPLOSION,entity.getComponent(BodyComponent.class));
-      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
-      entity.getComponent(ParticleEffectComponent.class).effect= particle;
+
       return entity;
    }
 
@@ -202,6 +199,10 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
        applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_PROJECTILE, Utilities.MASK_PLAYER_PROJECTILE,true);
        engine.addEntity(entity);
+      entity.add(engine.createComponent(ParticleEffectComponent.class));
+      Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
+      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
+      entity.getComponent(ParticleEffectComponent.class).effect= particle;
        return entity;
    }
 

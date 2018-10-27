@@ -13,7 +13,8 @@ public class ParticleEffectComponent  implements Component,Pool.Poolable {
    @Override
    public void reset() {
       if(effect!=null){
-         effect.getComponent(ParticleEffectDataComponent.class).isDead=true;
+         if(effect.getComponent(ParticleEffectDataComponent.class)!=null)
+            effect.getComponent(ParticleEffectDataComponent.class).isDead=true;
          effect=null;
       }
    }

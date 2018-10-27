@@ -13,7 +13,7 @@ public class ParticleEffectDataComponent implements Component,Pool.Poolable {
    public float yOffset=0;
    public float x=0;
    public float y=0;
-   public float timeTillDeath=0.5f;
+   public float timeTillDeath=0.01f;
    public boolean isDead=false;
    public Body attachedBody;
 
@@ -29,7 +29,7 @@ public class ParticleEffectDataComponent implements Component,Pool.Poolable {
       isAttached=false;
       isDead=false;
       attachedBody=null;
-      timeTillDeath=0.5f;
+      timeTillDeath=0.01f;
       isLooped=false;
    }
 }
