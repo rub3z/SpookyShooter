@@ -76,7 +76,7 @@ active: true
 lowMin: 1.0
 lowMax: 1.0
 highMin: 5.0
-highMax: 15.0
+highMax: 25.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -86,8 +86,8 @@ timeline0: 0.0
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 260.0
-highMax: 280.0
+highMin: 250.0
+highMax: 300.0
 relative: true
 scalingCount: 3
 scaling0: 1.0
