@@ -71,12 +71,12 @@ public class PlayerControlSystem extends IntervalSystem {
             mc.shot =      Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
             mc.secondary = Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT);
          }
-/*         if (p1 != null) {
+         if (p1 != null) {
             mc.moveX = p1.getAxis(1);
             mc.moveY = -p1.getAxis(0);
             mc.shot =      p1.getAxis(4) < -0.1;
             mc.secondary = p1.getAxis(4) > 0.1;
-         }*/
+         }
          if(ic.playerNum == 1) {
             mc.moveX = p2.getAxis(1);
             mc.moveY = -p2.getAxis(0);
