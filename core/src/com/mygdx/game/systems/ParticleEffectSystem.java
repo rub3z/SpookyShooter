@@ -42,9 +42,7 @@ public class ParticleEffectSystem extends IteratingSystem {
       batch.enableBlending();
       if(shouldRender){
          batch.begin();
-         System.out.println(renderQueue.size);
          for (Entity entity : renderQueue) {
-
             ParticleEffectDataComponent particleEffectComponent = peM.get(entity);
             particleEffectComponent.particleEffect.draw(batch, deltaTime);
          }
