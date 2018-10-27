@@ -68,7 +68,6 @@ public class Factory {
 
    private ParticleEffectManager particleEffectManager;
 
-   public Entity player;
    private Factory() {
       assetManager = new AssetManager(); //Declare AssetManager
       loadAssets();// Load assets
@@ -172,8 +171,6 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
-      this.player=entity;
-
       return entity;
    }
 
@@ -205,6 +202,9 @@ public class Factory {
       Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
       particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
       entity.getComponent(ParticleEffectComponent.class).effect= particle;
+
+
+
        return entity;
    }
 
@@ -264,6 +264,7 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).health = 900;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
+
       engine.addEntity(entity);
 
       return entity;
