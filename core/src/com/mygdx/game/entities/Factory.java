@@ -1,7 +1,10 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
@@ -68,6 +71,8 @@ public class Factory {
 
    private ParticleEffectManager particleEffectManager;
 
+   private ImmutableArray<Entity> players;
+
    private Factory() {
       assetManager = new AssetManager(); //Declare AssetManager
       loadAssets();// Load assets
@@ -85,6 +90,7 @@ public class Factory {
        //Load systems into engine
       loadSystemsIntoEngine();
       loadParticleEffects();
+      players=engine.getEntitiesFor(Family.all(IsPlayerComponent.class).get());
    }
 
    /**
@@ -264,7 +270,7 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).health = 900;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
-
+      
       engine.addEntity(entity);
 
       return entity;
