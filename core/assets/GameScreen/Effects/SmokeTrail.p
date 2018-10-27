@@ -135,5 +135,5 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-/D:/Workstation/SpookyShooter/core/assets/GameScreen/Gfx/Circle.png
+GameScreen/Gfx/Circle.png
 
