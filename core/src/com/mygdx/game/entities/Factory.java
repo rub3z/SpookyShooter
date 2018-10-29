@@ -81,7 +81,7 @@ public class Factory {
    /**
     * Array contains players in our engine.
     */
-   private ImmutableArray<Entity> players;
+   public ImmutableArray<Entity> players;
 
    private Factory() {
       assetManager = new AssetManager(); //Declare AssetManager
@@ -466,6 +466,11 @@ public class Factory {
          entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 1.2f);
          entity.getComponent(TransformComponent.class).scale.x = 0.1f;
          entity.getComponent(TransformComponent.class).scale.y = 0.1f;
+      }else if(type==2){
+         entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Bullet.atlas", "Bullet_1", 8);
+         entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 6f);
+         entity.getComponent(TransformComponent.class).scale.x = 0.5f;
+         entity.getComponent(TransformComponent.class).scale.y = 0.5f;
       }
 
 
@@ -583,4 +588,39 @@ public class Factory {
       return entity;
    }
 
+   public Entity spawnBoss(float x, float y, String behavior){
+      Entity entity = engine.createEntity();
+      entity.add(engine.createComponent(EnemyStatsComponent.class));
+      entity.add(engine.createComponent(TransformComponent.class));
+      entity.add(engine.createComponent(BodyComponent.class));
+      entity.add(engine.createComponent(TextureComponent.class));
+      entity.add(engine.createComponent(IsEnemyComponent.class));
+      entity.add(engine.createComponent(CollisionCallbackComponent.class));
+
+      entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
+              Pools.get(EnemyCollisionCallback.class).obtain();
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Enemies.atlas", "Enemies_0", 5);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_0", x, y, 10f);
+      entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
+      entity.getComponent(TransformComponent.class).scale.x = 5f;
+      entity.getComponent(TransformComponent.class).scale.y = 5f;
+      entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+              Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
+
+      entity.add(engine.createComponent(SteeringComponent.class));
+      entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
+      entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(100f);
+      entity.getComponent(EnemyStatsComponent.class).health = 1500;
+      entity.add(engine.createComponent(BehaviorComponent.class));
+      entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
+      entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
+      entity.getComponent(EnemyStatsComponent.class).target=players.get((MathUtils.random(0,players.size()-1)));
+      entity.getComponent(EnemyStatsComponent.class).bulletType=2;
+      entity.getComponent(EnemyStatsComponent.class).speed=25f;
+      entity.getComponent(EnemyStatsComponent.class).rof=4f;
+      engine.addEntity(entity);
+
+      return entity;
+   }
 }

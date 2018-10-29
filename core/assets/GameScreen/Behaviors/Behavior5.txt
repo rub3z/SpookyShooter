@@ -1,0 +1,4 @@
+shoot true
+move 60 30
+move 70 30
+move 50 30

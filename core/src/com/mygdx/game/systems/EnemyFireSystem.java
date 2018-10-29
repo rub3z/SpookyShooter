@@ -62,6 +62,7 @@ public class EnemyFireSystem extends IntervalSystem {
                   y1=y1/length;
                   body.setLinearVelocity((float)x1*Math.abs(es.speed),(float)y1*Math.abs(es.speed));
                   body.setTransform(body.getPosition(),Utilities.vectorToAngle(new Vector2((float)-x1,(float)-y1)));
+                  es.target=Factory.getFactory().players.get((MathUtils.random(0,Factory.getFactory().players.size()-1)));
                }
             }else{
                bullet.getComponent(BodyComponent.class).body.setLinearVelocity(0f,-es.speed);
