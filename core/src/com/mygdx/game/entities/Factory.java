@@ -172,7 +172,7 @@ public class Factory {
       entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", player, 5f);
-      entity.getComponent(BodyComponent.class).body = createBody(player, posx, posy, 0.7f);
+      entity.getComponent(BodyComponent.class).body = createBody("Player_2", posx, posy, 0.7f);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
@@ -354,11 +354,13 @@ public class Factory {
    }
 
    /**
-    * Call this method to create entities for the start of the game.
+    * Call this method to create entities for the start of the game.d
     */
    public void createEntities(int playerCount) {
       for(int i = 0; i < playerCount; i++){
-         engine.addEntity(createPlayer("Player_2", 10 + (i * 10), 10, i));
+         int num = 2+i;
+         String s ="Player_"+num;
+         engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
       }
 
       createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1);
