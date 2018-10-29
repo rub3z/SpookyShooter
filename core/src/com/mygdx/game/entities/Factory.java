@@ -361,7 +361,8 @@ public class Factory {
          engine.addEntity(createPlayer("Player_2", 10 + (i * 10), 10, i));
       }
 
-      createInvisibleWall(Utilities.FRUSTUM_WIDTH*0/5,0-0.5f,Utilities.FRUSTUM_WIDTH*5/5,Utilities.FRUSTUM_HEIGHT+1f,1);
+      createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1);
+      createInvisibleWall(-100,-100,Utilities.FRUSTUM_WIDTH+200,Utilities.FRUSTUM_HEIGHT+200,1);
 
 
    }
