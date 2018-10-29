@@ -18,9 +18,25 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
 
    @Override
    public void run(Entity thisObject, Entity otherObject) {
+      int numPlayer=Factory.getFactory().players.size();
+      float scale=1;
+      switch (numPlayer){
+         case 1:
+            scale=1;
+            break;
+         case 2:
+            scale=0.61f;
+            break;
+         case 3:
+            scale=0.4333f;
+            break;
+         case 4:
+            scale=0.385f;
+            break;
+      }
        if(otherObject.getComponent(IsBulletComponent.class)!=null){
           if(thisObject.getComponent(EnemyStatsComponent.class).health >= 0) {
-             thisObject.getComponent(EnemyStatsComponent.class).health -= 100;
+             thisObject.getComponent(EnemyStatsComponent.class).health -= 100*scale;
              otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
           }
           else {
@@ -36,7 +52,7 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
 
       if(otherObject.getComponent(IsLaserComponent.class)!=null){
          if(thisObject.getComponent(EnemyStatsComponent.class).health >= 0) {
-            thisObject.getComponent(EnemyStatsComponent.class).health -= 100;
+            thisObject.getComponent(EnemyStatsComponent.class).health -= 1000*scale;
          }
          else {
             updateScore(otherObject.getComponent(IsLaserComponent.class).playerNum);

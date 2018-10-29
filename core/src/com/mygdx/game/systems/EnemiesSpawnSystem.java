@@ -24,7 +24,7 @@ public class EnemiesSpawnSystem extends IteratingSystem {
             Factory.getFactory().spawnEnemy1(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10, "GameScreen/Behaviors/Behavior2.txt");
          }
       });
-      enemySpawnData.add(new EnemySpawnData(0.1f) {
+      enemySpawnData.add(new EnemySpawnData(0.3f) {
          @Override
          public void spawn() {
             Factory.getFactory().spawnEnemy2(Utilities.FRUSTUM_WIDTH/2-100,Utilities.FRUSTUM_HEIGHT+10, "GameScreen/Behaviors/Behavior3.txt");
@@ -34,18 +34,28 @@ public class EnemiesSpawnSystem extends IteratingSystem {
       enemySpawnData.add(new EnemySpawnData(0.1f) {
          @Override
          public void spawn() {
-            Factory.getFactory().spawnBoss(Utilities.FRUSTUM_WIDTH / 2, Utilities.FRUSTUM_HEIGHT -20f, "GameScreen/Behaviors/Behavior5.txt");
+            if (Factory.getFactory().boss.size() == 0) {
+               Factory.getFactory().spawnBoss(Utilities.FRUSTUM_WIDTH / 2, Utilities.FRUSTUM_HEIGHT +25, "GameScreen/Behaviors/Behavior5.txt");
+
+            }else{
+               this.accumulator=0;
+            }
          }
       });
    }
 
    @Override
    public void update(float deltaTime){
+      int numPlayer=Factory.getFactory().players.size();
+      int scale =1;
+      if(numPlayer>=1){
+         scale=numPlayer;
+      }
       for(EnemySpawnData data: enemySpawnData){
          data.accumulator+=deltaTime;
-         if(data.accumulator>=data.spawnRate){
+         if(data.accumulator>=data.spawnRate/scale){
             data.spawn();
-            data.accumulator-=data.spawnRate;
+            data.accumulator-=data.spawnRate/scale;
          }
       }
 

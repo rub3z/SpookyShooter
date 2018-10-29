@@ -145,7 +145,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:Gfx/Enemies_0_1.png,type:Input,regionName:null},{path:Gfx/Enemies_0_3.png,type:Input,regionName:null},{path:Gfx/Enemies_0_2.png,type:Input,regionName:null},{path:Gfx/Enemies_1_0.png,type:Input,regionName:null},{path:Gfx/Enemies_1_2.png,type:Input,regionName:null},{path:Gfx/Enemies_1_1.png,type:Input,regionName:null}]
+inputFiles=[{path:Gfx/Enemies_0_1.png,type:Input,regionName:null},{path:Gfx/Enemies_0_3.png,type:Input,regionName:null},{path:Gfx/Enemies_0_2.png,type:Input,regionName:null},{path:Gfx/Enemies_1_0.png,type:Input,regionName:null},{path:Gfx/Enemies_1_2.png,type:Input,regionName:null},{path:Gfx/Enemies_1_1.png,type:Input,regionName:null},{path:Gfx/Enemies_2_0.png,type:Input,regionName:null}]
 
 
 ---
