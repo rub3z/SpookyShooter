@@ -10,6 +10,9 @@ import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.utilities.Utilities;
 
+/**
+ * A system responsible for spawning laser for a player.
+ */
 public class LaserSystem extends IntervalSystem {
    private ImmutableArray<Entity> entities;
    private ComponentMapper<MovementComponent> mm;

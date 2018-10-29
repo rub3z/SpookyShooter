@@ -11,6 +11,9 @@ import com.mygdx.game.entities.Factory;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utilities.ParticleEffectManager;
 
+/**
+ * Collision callback for an enemy
+ */
 public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable {
 
    @Override

@@ -7,6 +7,9 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.utilities.Utilities;
 
+/**
+ * A system responsible for spawning enemies.
+ */
 public class EnemiesSpawnSystem extends IteratingSystem {
 
 

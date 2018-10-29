@@ -8,6 +8,9 @@ import com.mygdx.game.components.IsEnemyBulletComponent;
 import com.mygdx.game.components.NeedToRemoveComponent;
 import com.mygdx.game.entities.Factory;
 
+/**
+ * Collision callback for an invisible wall.
+ */
 public class InvisibleWallCollisionCallback implements CollisionCallback, Pool.Poolable {
     private ComponentMapper<IsBulletComponent> isBulletComponentComponentMapper= ComponentMapper.getFor(IsBulletComponent.class);
     private ComponentMapper<IsEnemyBulletComponent>isEnemyBulletComponentComponentMapper=ComponentMapper.getFor(IsEnemyBulletComponent.class);

@@ -3,6 +3,9 @@ package com.mygdx.game.utilities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * A utility class stores useful functions and constants.
+ */
 public class Utilities {
     //Use in RendeingSystem
     public static final float PPM=16f;

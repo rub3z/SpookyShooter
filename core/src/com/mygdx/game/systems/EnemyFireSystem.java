@@ -16,6 +16,9 @@ import com.mygdx.game.components.NeedToRemoveComponent;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.utilities.Utilities;
 
+/**
+ * A system responsible for spawning bullet for enemies.
+ */
 public class EnemyFireSystem extends IntervalSystem {
 
    ImmutableArray<Entity> entities;

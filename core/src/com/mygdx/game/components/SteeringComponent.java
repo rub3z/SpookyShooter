@@ -11,6 +11,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Pool;
 import com.mygdx.game.utilities.Utilities;
 
+/**
+ * This component stores variables related AI behavior
+ */
 public class SteeringComponent implements Steerable<Vector2>, Component, Pool.Poolable {
   public Body body;
 

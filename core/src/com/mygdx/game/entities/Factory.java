@@ -28,6 +28,9 @@ import com.mygdx.game.utilities.BehaviorBuilder;
 import com.mygdx.game.utilities.ParticleEffectManager;
 import com.mygdx.game.utilities.Utilities;
 
+/***
+ * A factory that handles all the creation of entity, system, and assets loading.
+ */
 public class Factory {
 
 
@@ -70,8 +73,14 @@ public class Factory {
     * Default Constructor
     */
 
+   /**
+    * Manager to create and pool particle effects
+    */
    private ParticleEffectManager particleEffectManager;
 
+   /**
+    * Array contains players in our engine.
+    */
    private ImmutableArray<Entity> players;
 
    private Factory() {
@@ -215,6 +224,13 @@ public class Factory {
        return entity;
    }
 
+   /**
+    * Create a laser that damages enemies
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @param playerNum player's id
+    * @return a laser
+    */
    public Entity laser(float x, float y, int playerNum) {
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(MovementComponent.class));
@@ -386,6 +402,13 @@ public class Factory {
       }
    }
 
+   /**
+    * Create an invisible block of wall
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @param scale block scale
+    * @return a created block of wall
+    */
    private Entity createAnInvisibleWall(float x, float y, float scale){
        Entity entity = engine.createEntity();
        entity.add(engine.createComponent(BodyComponent.class));
@@ -420,6 +443,13 @@ public class Factory {
        }
    }
 
+   /**
+    * Spawn a bullet for an enemy to use
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @param type type of bullet
+    * @return a bullet
+    */
    public Entity createEnemyBullet (float x, float y, int type){
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(TransformComponent.class));
@@ -445,6 +475,9 @@ public class Factory {
       return entity;
    }
 
+   /**
+    * Load particle presets from file into our game.
+    */
    public void loadParticleEffects(){
       particleEffectManager=new ParticleEffectManager();
       particleEffectManager.addParticleEffect(
@@ -457,6 +490,13 @@ public class Factory {
               1/5f);
    }
 
+   /**
+    * Create a particle effect
+    * @param type type of effect
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @return a particle effect
+    */
    public Entity createParticleEffect(int type, float x, float y){
       Entity entity=engine.createEntity();
       ParticleEffectDataComponent particleEffectComponent=engine.createComponent(ParticleEffectDataComponent.class);
@@ -467,10 +507,24 @@ public class Factory {
       return entity;
    }
 
+   /**
+    * Crate a particle effect and attach it to another entity
+    * @param type type of effect
+    * @param bodyComponent body in which to attach the particle effect to
+    * @return a particle effect
+    */
    public Entity createParticleEffect(int type, BodyComponent bodyComponent){
       return createParticleEffect(type,bodyComponent,0f,0f);
    }
 
+   /**
+    * Crate a particle effect and attach it to another entity
+    * @param type type of effect
+    * @param bodyComponent body in which to attach the particle effect to
+    * @param xOffSet x-offset from the body
+    * @param yOffset y-offset from the body
+    * @return a particle effect
+    */
    public Entity createParticleEffect(int type, BodyComponent bodyComponent, float xOffSet, float yOffset) {
       Entity entity = engine.createEntity();
       ParticleEffectDataComponent particleEffectComponent = engine.createComponent(ParticleEffectDataComponent.class);
@@ -486,6 +540,13 @@ public class Factory {
       return entity;
    }
 
+   /**
+    * Create an enemy that randomly target a player
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @param behavior enemy's behavior
+    * @return an enemy
+    */
    public Entity spawnEnemy2(float x, float y, String behavior) {
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(EnemyStatsComponent.class));
