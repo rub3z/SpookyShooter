@@ -1,2 +1,3 @@
 shoot true
-move 60 75
+move 60 60
+sleep 1000000

@@ -1,6 +1,5 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
@@ -287,13 +286,14 @@ public class Factory {
 
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
-      entity.getComponent(EnemyStatsComponent.class).health = 1500;
+      entity.getComponent(EnemyStatsComponent.class).health = 1000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
       entity.getComponent(SteeringComponent.class).scale=4f;
       engine.addEntity(entity);
+      entity.getComponent(TransformComponent.class).position.set( entity.getComponent(TransformComponent.class).position.x, entity.getComponent(TransformComponent.class).position.y,2);
 
       return entity;
    }
@@ -383,9 +383,14 @@ public class Factory {
          engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
       }
 
-      createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1);
-      createInvisibleWall(-100,-100,Utilities.FRUSTUM_WIDTH+200,Utilities.FRUSTUM_HEIGHT+200,1);
+      //Player boundary
+      createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1,0);
 
+      //Projectile boundary
+      createInvisibleWall(-10,-20,Utilities.FRUSTUM_WIDTH+20,Utilities.FRUSTUM_HEIGHT+25,1,1);
+
+      //Enemy boundary
+      createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
 
    }
 
@@ -413,7 +418,7 @@ public class Factory {
     * @param scale block scale
     * @return a created block of wall
     */
-   private Entity createAnInvisibleWall(float x, float y, float scale){
+   private Entity createAnInvisibleWall(float x, float y, float scale, int type){
        Entity entity = engine.createEntity();
        entity.add(engine.createComponent(BodyComponent.class));
        entity.add(engine.createComponent(CollisionCallbackComponent.class));
@@ -421,8 +426,17 @@ public class Factory {
        entity.getComponent(BodyComponent.class).body = createBody("Wall_0",x, y, scale);
        entity.getComponent(BodyComponent.class).body.setUserData(entity);
        entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
-       applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-               Utilities.CATEGORY_ENVIRONMENT, Utilities.MASK_ENVIRONMENT,false);
+       if(type==1){
+          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+                  Utilities.CATEGORY_BULLET_BOUNDARY, Utilities.MASK_BULLET_BOUNDARY,false);
+       }else if(type==2){
+          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+                  Utilities.CATEGORY_ENEMY_BOUNDARY, Utilities.MASK_ENEMY_BOUNDARY,false);
+       }else{
+          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+                  Utilities.CATEGORY_ENVIRONMENT, Utilities.MASK_ENVIRONMENT,false);
+       }
+
         return  entity;
    }
 
@@ -434,16 +448,16 @@ public class Factory {
      * @param height height of the boundary wall in meter
      * @param scale how big should each block of the wall be. Default value in 1 meter
      */
-   private void createInvisibleWall(float x, float y, float width, float height, float scale){
+   private void createInvisibleWall(float x, float y, float width, float height, float scale, int type){
        //Top and Buttom
        for (float i=x; i<=x+width;i=i+scale){
-           createAnInvisibleWall(i,y,scale);
-           createAnInvisibleWall(i,y+height,scale);
+           createAnInvisibleWall(i,y,scale,type);
+           createAnInvisibleWall(i,y+height,scale,type);
        }
        //Left and right wall
        for (float i = y+scale; i<=y+height;i=i+scale){
-           createAnInvisibleWall(x,i,scale);
-           createAnInvisibleWall(x+width,i,scale);
+           createAnInvisibleWall(x,i,scale,type);
+           createAnInvisibleWall(x+width,i,scale,type);
        }
    }
 
@@ -481,6 +495,7 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_ENEMY_PROJECTILE, Utilities.MASK_ENEMY_PROJECTILE, true);
       engine.addEntity(entity);
+      entity.getComponent(TransformComponent.class).position.set( entity.getComponent(TransformComponent.class).position.x, entity.getComponent(TransformComponent.class).position.y,0);
       return entity;
    }
 
@@ -579,7 +594,7 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(10f);
-      entity.getComponent(EnemyStatsComponent.class).health = 1500;
+      entity.getComponent(EnemyStatsComponent.class).health = 1000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       if(players.size()>0){
@@ -591,9 +606,17 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).rof=4f;
       engine.addEntity(entity);
       entity.getComponent(SteeringComponent.class).scale=2f;
+      entity.getComponent(TransformComponent.class).position.set( entity.getComponent(TransformComponent.class).position.x, entity.getComponent(TransformComponent.class).position.y,3);
       return entity;
    }
 
+   /**
+    * Spawn boss that aim at a target
+    * @param x x-coordinate
+    * @param y y-coordinate
+    * @param behavior behavior of the boss
+    * @return boss entity
+    */
    public Entity spawnBoss(float x, float y, String behavior){
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(EnemyStatsComponent.class));
@@ -617,7 +640,7 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
-      entity.getComponent(EnemyStatsComponent.class).health = 500000;
+      entity.getComponent(EnemyStatsComponent.class).health = 100000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
@@ -626,6 +649,7 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).speed=25f;
       entity.getComponent(EnemyStatsComponent.class).rof=4f;
       entity.add(engine.createComponent(IsBossComponent.class));
+      entity.getComponent(TransformComponent.class).position.set( entity.getComponent(TransformComponent.class).position.x, entity.getComponent(TransformComponent.class).position.y,1);
       entity.getComponent(SteeringComponent.class).scale=105f;
       engine.addEntity(entity);
 

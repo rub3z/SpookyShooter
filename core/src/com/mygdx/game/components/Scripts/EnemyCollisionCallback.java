@@ -2,11 +2,7 @@ package com.mygdx.game.components.Scripts;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Pool;
-import com.mygdx.game.components.BodyComponent;
-import com.mygdx.game.components.EnemyStatsComponent;
-import com.mygdx.game.components.IsBulletComponent;
-import com.mygdx.game.components.IsLaserComponent;
-import com.mygdx.game.components.NeedToRemoveComponent;
+import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utilities.ParticleEffectManager;
