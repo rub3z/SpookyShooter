@@ -48,7 +48,7 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
 
       if(otherObject.getComponent(IsLaserComponent.class)!=null){
          if(thisObject.getComponent(EnemyStatsComponent.class).health >= 0) {
-            thisObject.getComponent(EnemyStatsComponent.class).health -= 1000*scale;
+            thisObject.getComponent(EnemyStatsComponent.class).health -= 1200*scale;
          }
          else {
             updateScore(otherObject.getComponent(IsLaserComponent.class).playerNum);

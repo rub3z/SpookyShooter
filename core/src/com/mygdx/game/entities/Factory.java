@@ -583,10 +583,10 @@ public class Factory {
       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback =
               Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Enemies.atlas", "Enemies_1", 5);
-      entity.getComponent(BodyComponent.class).body = createBody("Enemies_1", x, y, 2);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_1", x, y, 4);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
-      entity.getComponent(TransformComponent.class).scale.x = 1f;
-      entity.getComponent(TransformComponent.class).scale.y = 1f;
+      entity.getComponent(TransformComponent.class).scale.x = 1.2f;
+      entity.getComponent(TransformComponent.class).scale.y = 1.2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
               Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
@@ -640,7 +640,7 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
-      entity.getComponent(EnemyStatsComponent.class).health = 100000;
+      entity.getComponent(EnemyStatsComponent.class).health = 300000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;

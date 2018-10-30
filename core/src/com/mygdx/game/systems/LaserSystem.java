@@ -49,7 +49,7 @@ public class LaserSystem extends IntervalSystem {
             }
             else {
                lc.laser.getComponent(BodyComponent.class).body.setTransform(
-                bC.body.getPosition().x - 0.25f + ((float)Math.random()/2), //this adds a neat lazor wiggle
+                bC.body.getPosition().x - 0.5f + ((float)Math.random()), //this adds a neat lazor wiggle
                 bC.body.getPosition().y +33,
                 0);
             }
