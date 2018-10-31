@@ -97,7 +97,7 @@ public class Factory {
       camera.position.set(Utilities.FRUSTUM_WIDTH / 2f, Utilities.FRUSTUM_HEIGHT / 2f, 0);
 
       bodyEditorLoader = new BodyEditorLoader(Gdx.files.internal("GameScreen/HitboxData.json"));//Declare hitbox loader
-      engine = new PooledEngine(); //Ashely engine
+      engine = new PooledEngine(10,500,500,500); //Ashely engine
        //Load systems into engine
       loadSystemsIntoEngine();
       loadParticleEffects();
@@ -361,7 +361,7 @@ public class Factory {
     * @return Box2D body
     */
    public Body createBody(String nameOfBody, float posX, float posY,  float scale) {
-      BodyDef bodyDef = new BodyDef();
+      BodyDef bodyDef = Pools.get(BodyDef.class).obtain();
       bodyDef.type = BodyDef.BodyType.DynamicBody;
       bodyDef.position.set(posX, posY);
       Body body = world.createBody(bodyDef);
