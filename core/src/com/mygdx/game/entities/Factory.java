@@ -339,7 +339,7 @@ public class Factory {
       engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
-      engine.addSystem(new PhysicsDebugSystem(world, camera));
+      //engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
       engine.addSystem(new EntityRemovingSystem(world,engine));
